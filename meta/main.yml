@@ -1,0 +1,7 @@
+---
+galaxy_info:
+  author: Jonathan Hanson <jonathan@jonathan-hanson.com>
+  description: The ZNC IRC bouncer
+  license: MIT
+  min_ansible_version: 1.2
+dependencies: []

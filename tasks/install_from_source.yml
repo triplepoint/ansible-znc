@@ -1,0 +1,24 @@
+---
+- name: Get a local copy of the ZNC source tarball is present
+  get_url: url=http://znc.in/releases/znc-{{ znc_install_version }}.tar.gz dest=/tmp/
+
+- name: download the ClientBuffer module source
+  get_url: url=https://raw.githubusercontent.com/jpnurmi/znc-clientbuffer/znc-1.6.0/clientbuffer.cpp dest=/tmp/
+
+- name: clean out any previous builds
+  file: path=/usr/local/src/znc-{{ znc_install_version }} state=absent
+
+- name: Unzip the source tarball
+  unarchive: copy=no src=/tmp/znc-{{ znc_install_version }}.tar.gz dest=/usr/local/src
+
+- name: copy over the ClientBuffer module source
+  command: "cp /tmp/clientbuffer.cpp /usr/local/src/znc-{{ znc_install_version }}/modules/"
+
+- name: Configure and make ZNC from source
+  command: "{{ item }}"
+  with_items:
+    - "./configure"
+    - "make"
+    - "make install"
+  args:
+    chdir: /usr/local/src/znc-{{ znc_install_version }}
