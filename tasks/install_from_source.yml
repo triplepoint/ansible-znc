@@ -1,4 +1,29 @@
 ---
+- apt_repository: repo='ppa:ubuntu-toolchain-r/test'
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'precise'
+
+- apt_repository: repo='ppa:teward/icu-backports'
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'precise'
+
+- apt_repository: repo='ppa:teward/swig3.0'
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'trusty'
+
+- name: Ensure apt dependencies are present
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=3600
+  with_items:
+    - build-essential
+    - libssl-dev
+    - libperl-dev
+    - pkg-config
+    - swig3.0
+    - libicu-dev
+
+- name: Ensure legacy apt dependencies are present
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=3600
+  with_items:
+    - g++-4.7
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'precise'
+
 - name: Get a local copy of the ZNC source tarball is present
   get_url: url=http://znc.in/releases/znc-{{ znc_install_version }}.tar.gz dest=/tmp/
 
@@ -8,7 +33,7 @@
 - name: clean out any previous builds
   file: path=/usr/local/src/znc-{{ znc_install_version }} state=absent
 
-- name: Unzip the source tarball
+- name: Unzip the ZNC source tarball
   unarchive: copy=no src=/tmp/znc-{{ znc_install_version }}.tar.gz dest=/usr/local/src
 
 - name: copy over the ClientBuffer module source
@@ -17,7 +42,7 @@
 - name: Configure and make ZNC from source
   command: "{{ item }}"
   with_items:
-    - "./configure"
+    - "./configure --disable-openssl"
     - "make"
     - "make install"
   args:

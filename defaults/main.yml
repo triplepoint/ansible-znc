@@ -1,9 +1,10 @@
 ---
 # ZNC Install
 znc_install_version: 1.6.1
+znc_force_install: True
 znc_exec_user: znc-admin
-znc_datadir: /etc/znc
-znc_debug: false
+znc_config_root: /etc/znc
+znc_exec_with_debug: false
 
 ## ZNC Global Configuration
 znc_max_buffer_size: 100000
@@ -11,24 +12,9 @@ znc_port: 6666
 znc_ipv4: true
 znc_ipv6: false
 znc_ssl: true
-znc_ssl_certfile: "{{ znc_datadir }}/znc.pem"
+znc_ssl_certfile: "{{ znc_config_root }}/znc.pem"
 znc_global_modules:
   - webadmin
-
-# ZNC Networks and Channels
-# Note that this object is only used in the znc_users object below, as a template.
-znc_networks:
-  freenode:
-    server: chat.freenode.net
-    port: 6697
-    ssl: true
-    # password: ""
-    # channels:
-    #   - "#freenode"
-    # modules:
-    #   - route_replies
-    #   - keepnick
-    #   - clientbuffer
 
 # ZNC User Definitions
 # See the ZNC documentation for more information at:
@@ -50,7 +36,18 @@ znc_users:
     # chanmodes: "+stn"
     # ident: adminuser
     # multiclients: false
-    # networks: {{ znc_networks }}
+    # networks:
+    #   freenode:
+    #     server: chat.freenode.net
+    #     port: 6697
+    #     ssl: true
+    #     password: ""
+    #     channels:
+    #       - "#freenode"
+    #     modules:
+    #       - route_replies
+    #       - keepnick
+    #       - clientbuffer
     modules:
       - chansaver
       - controlpanel

@@ -11,4 +11,4 @@ respawn limit 15 5
 
 setuid {{ znc_exec_user }}
 
-exec /usr/local/bin/znc --datadir={{ znc_datadir }} --foreground {% if znc_debug %}--debug{% endif %}
+exec /usr/local/bin/znc --datadir={{ znc_config_root }} --foreground {% if znc_exec_with_debug %}--debug{% endif %}
