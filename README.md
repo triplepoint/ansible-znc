@@ -1,4 +1,4 @@
-# Role Name
+# Ansible ZNC
 Install and configure the ZNC IRC bouncer.
 
 Includes the [ClientBuffer module](http://wiki.znc.in/Clientbuffer) to support multiple separate client buffers per account.
