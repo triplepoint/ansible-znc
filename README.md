@@ -76,7 +76,7 @@ None.
     - hosts: whatever
       sudo: yes
       roles:
-        - znc
+        - triplepoint.znc
 
 ## License
 MIT
