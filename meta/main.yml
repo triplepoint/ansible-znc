@@ -1,7 +1,16 @@
 ---
 galaxy_info:
-  author: Jonathan Hanson <jonathan@jonathan-hanson.com>
+  author: Jonathan Hanson
   description: The ZNC IRC bouncer
   license: MIT
-  min_ansible_version: 1.2
+  min_ansible_version: 1.8
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+  galaxy_tags:
+    - ZNC
+    - IRC
+    - bouncer
+    - chat
 dependencies: []
