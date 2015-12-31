@@ -24,7 +24,7 @@
     - g++-4.7
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'precise'
 
-- name: Get a local copy of the ZNC source tarball is present
+- name: Get a local copy of the ZNC source tarball
   get_url: url=http://znc.in/releases/znc-{{ znc_install_version }}.tar.gz dest=/tmp/
 
 - name: download the ClientBuffer module source
@@ -42,7 +42,7 @@
 - name: Configure and make ZNC from source
   command: "{{ item }}"
   with_items:
-    - "./configure --disable-openssl"
+    - "./configure"
     - "make"
     - "make install"
   args:
