@@ -1,4 +1,4 @@
-# Ansible ZNC
+# Ansible ZNC [![Build Status](https://travis-ci.org/triplepoint/ansible-znc.svg?branch=master)](https://travis-ci.org/triplepoint/ansible-znc)
 Install and configure the ZNC IRC bouncer.
 
 Includes the [ClientBuffer module](http://wiki.znc.in/Clientbuffer) to support multiple separate client buffers per account.
