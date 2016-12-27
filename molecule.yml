@@ -1,0 +1,25 @@
+---
+driver:
+  name: docker
+
+molecule:
+  ignore_paths:
+    - .git
+    - .molecule
+    - .tox
+    - .vagrant
+
+docker:
+  containers:
+    - name: ubuntu_12_04
+      image: ubuntu
+      image_version: 12.04
+    - name: ubuntu_14_04
+      image: ubuntu
+      image_version: 14.04
+    - name: ubuntu_16_04
+      image: ubuntu
+      image_version: 16.04
+
+verifier:
+  name: testinfra

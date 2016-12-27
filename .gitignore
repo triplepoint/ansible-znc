@@ -1,0 +1,5 @@
+.git
+/.molecule
+/.tox
+/.vagrant
+/*.retry
