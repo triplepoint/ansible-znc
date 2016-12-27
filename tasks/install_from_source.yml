@@ -1,4 +1,7 @@
 ---
+- name: Ensure apt cache is relatively up to date
+  apt: update_cache=yes cache_valid_time=86400
+
 - apt_repository: repo='ppa:ubuntu-toolchain-r/test'
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'precise'
 
@@ -9,7 +12,7 @@
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'trusty'
 
 - name: Ensure apt dependencies are present
-  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=86400
+  apt: name={{ item }} state=latest
   with_items:
     - build-essential
     - libssl-dev
@@ -19,7 +22,7 @@
     - libicu-dev
 
 - name: Ensure legacy apt dependencies are present
-  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=86400
+  apt: name={{ item }} state=latest
   with_items:
     - g++-4.7
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'precise'
