@@ -1,0 +1,10 @@
+
+[Unit]
+Description=ZNC IRC bouncer service
+
+[Service]
+User={{ znc_exec_user }}
+ExecStart=/usr/local/bin/znc --datadir={{ znc_config_root }} --foreground {% if znc_exec_with_debug %}--debug{% endif %}
+
+[Install]
+WantedBy=multi-user.target

@@ -9,7 +9,7 @@
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'trusty'
 
 - name: Ensure apt dependencies are present
-  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=3600
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=86400
   with_items:
     - build-essential
     - libssl-dev
@@ -19,13 +19,13 @@
     - libicu-dev
 
 - name: Ensure legacy apt dependencies are present
-  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=3600
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=86400
   with_items:
     - g++-4.7
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'precise'
 
 - name: Get a local copy of the ZNC source tarball
-  get_url: url=http://znc.in/releases/znc-{{ znc_install_version }}.tar.gz dest=/tmp/
+  get_url: url=http://znc.in/releases/archive/znc-{{ znc_install_version }}.tar.gz dest=/tmp/
 
 - name: download the ClientBuffer module source
   get_url: url=https://raw.githubusercontent.com/jpnurmi/znc-clientbuffer/znc-1.6.0/clientbuffer.cpp dest=/tmp/
