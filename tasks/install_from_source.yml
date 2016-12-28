@@ -2,8 +2,14 @@
 - name: Ensure apt cache is relatively up to date
   apt: update_cache=yes cache_valid_time=86400
 
+- apt_repository: repo='ppa:ubuntu-toolchain-r/test'
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '12.04'
+
+- apt_repository: repo='ppa:teward/icu-backports'
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '12.04'
+
 - apt_repository: repo='ppa:teward/swig3.0'
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version <= '14.04'
 
 - name: Ensure apt dependencies are present
   apt: name={{ item }} state=latest
@@ -14,6 +20,17 @@
     - libssl-dev
     - pkg-config
     - swig3.0
+
+- name: Ensure legacy apt dependencies are present
+  apt: name={{ item }} state=latest
+  with_items:
+    - g++-4.7
+    - gcc-4.7
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '12.04'
+
+- name: Ensure g++ 4.7 is the default compiler
+  alternatives: name="g++"" path="/usr/bin/g++-4.8" link="/usr/bin/g++""
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '12.04'
 
 - name: Get a local copy of the ZNC source tarball
   get_url: url=http://znc.in/releases/archive/znc-{{ znc_install_version }}.tar.gz dest=/tmp/
