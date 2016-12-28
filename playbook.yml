@@ -6,5 +6,7 @@
       with_items:
         - ca-certificates
         - openssl
+        - net-tools   # for testinfra, later
+
   roles:
     - role: ansible-znc
