@@ -1,11 +1,19 @@
 sudo: required
+
 language: python
+
 services:
   - docker
+
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
+
 install:
   - pip install -U ansible==2.2.0.0 molecule docker-py testinfra ansible-lint
+
 script:
   - molecule test
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
