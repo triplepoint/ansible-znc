@@ -4,6 +4,8 @@ driver:
 
 molecule:
   ignore_paths:
+    - __pycache__
+    - .cache
     - .git
     - .molecule
     - .tox

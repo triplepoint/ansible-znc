@@ -1,4 +1,6 @@
 .git
+__pycache__
+/.cache
 /.molecule
 /.tox
 /.vagrant
