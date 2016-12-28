@@ -29,7 +29,7 @@
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '12.04'
 
 - name: Ensure g++ 4.7 is the default compiler
-  alternatives: name="g++"" path="/usr/bin/g++-4.8" link="/usr/bin/g++""
+  alternatives: name="g++" path="/usr/bin/g++-4.8" link="/usr/bin/g++"
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '12.04'
 
 - name: Get a local copy of the ZNC source tarball
