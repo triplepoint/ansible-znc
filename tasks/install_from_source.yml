@@ -2,17 +2,20 @@
 - name: Ensure apt cache is relatively up to date
   apt: update_cache=yes cache_valid_time=86400
 
-- apt_repository: repo='ppa:ubuntu-toolchain-r/test'
+- name: Ensure ubuntu-toolchain-r/test PPA is installed
+  apt_repository: repo='ppa:ubuntu-toolchain-r/test'
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '12.04'
 
-- apt_repository: repo='ppa:teward/icu-backports'
+- name: Ensure ICU backports PPA is installed
+  apt_repository: repo='ppa:teward/icu-backports'
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '12.04'
 
-- apt_repository: repo='ppa:teward/swig3.0'
+- name: Ensure swig3.0 PPA is installed
+  apt_repository: repo='ppa:teward/swig3.0'
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version <= '14.04'
 
 - name: Ensure apt dependencies are present
-  apt: name={{ item }} state=latest
+  apt: name={{ item }} state=present
   with_items:
     - build-essential
     - libicu-dev
@@ -22,7 +25,7 @@
     - swig3.0
 
 - name: Ensure legacy apt dependencies are present
-  apt: name={{ item }} state=latest
+  apt: name={{ item }} state=present
   with_items:
     - g++-4.7
     - gcc-4.7
