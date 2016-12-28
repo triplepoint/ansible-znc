@@ -26,12 +26,12 @@
   sudo_user: "{{ znc_exec_user }}"
   notify: restart znc
 
-- name: Ensure the ZNC upstart file is installed
+- name: Ensure the ZNC upstart service is configured
   template: src=znc.conf.upstart.j2 dest=/etc/init/znc.conf
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version < '16.04'
   notify: restart znc
 
-- name: Ensure the Oftbot service runs
+- name: Ensure the ZNC service is configured
   template: src=znc.service.systemd.j2 dest=/lib/systemd/system/znc.service
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version >= '16.04'
   notify: restart znc

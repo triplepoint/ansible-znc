@@ -11,9 +11,6 @@ molecule:
 
 docker:
   containers:
-    - name: ubuntu_12_04
-      image: ubuntu
-      image_version: 12.04
     - name: ubuntu_14_04
       image: ubuntu
       image_version: 14.04
