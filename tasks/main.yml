@@ -8,8 +8,11 @@
   include: install_from_source.yml
   when: (znc_force_install == True) or (znc_installed_version.rc != 0) or (znc_install_version | version_compare(znc_installed_version.stdout, "!="))
 
+- name: Ensure the ZNC admin group is present
+  group: name="{{ znc_exec_user }}"
+
 - name: Ensure the ZNC admin user is present
-  user: name="{{ znc_exec_user }}"
+  user: name="{{ znc_exec_user }}" group="{{ znc_exec_user }}"
 
 - name: Ensure the ZNC configuration directory is present
   file: path={{ znc_config_root }}/configs state=directory owner={{ znc_exec_user }} group={{ znc_exec_user }}
@@ -22,8 +25,8 @@
   command: "/usr/local/bin/znc --datadir={{ znc_config_root }} --makepem"
   args:
     creates: "{{ znc_config_root }}/znc.pem"
-  sudo: yes
-  sudo_user: "{{ znc_exec_user }}"
+  become: yes
+  become_user: "{{ znc_exec_user }}"
   notify: restart znc
 
 - name: Ensure the ZNC upstart service is configured
@@ -35,3 +38,6 @@
   template: src=znc.service.systemd.j2 dest=/lib/systemd/system/znc.service
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version >= '16.04'
   notify: restart znc
+
+- name: Ensure ZNC is started and enabled at boot
+  service: name=znc state=started enabled=yes
