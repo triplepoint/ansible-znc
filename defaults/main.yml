@@ -1,6 +1,6 @@
 ---
 # ZNC Install
-znc_install_version: 1.6.2
+znc_install_version: 1.6.4
 znc_force_install: False
 znc_exec_user: znc-admin
 znc_config_root: /etc/znc
