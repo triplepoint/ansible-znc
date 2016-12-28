@@ -6,7 +6,8 @@
       with_items:
         - ca-certificates
         - openssl
-        - net-tools   # for testinfra, later
+    - name: Ensure net tools are present, to support testinfra later
+      apt: name=net-tools
 
   roles:
     - role: ansible-znc
