@@ -49,6 +49,8 @@
 
 - name: copy over the ClientBuffer module source
   command: "cp /tmp/clientbuffer.cpp /usr/local/src/znc-{{ znc_install_version }}/modules/"
+  args:
+    creates: "/usr/local/src/znc-{{ znc_install_version }}/modules/clientbuffer.cpp"
 
 - name: Configure and make ZNC from source
   command: "{{ item }}"
@@ -58,3 +60,5 @@
     - "make install"
   args:
     chdir: /usr/local/src/znc-{{ znc_install_version }}
+  tags:
+    - skip_ansible_lint # This is already guarded by the when statement on include
