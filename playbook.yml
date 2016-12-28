@@ -1,4 +1,10 @@
 ---
 - hosts: all
+  pre_tasks:
+    - name: Ensure CA Certificates are present, so we can talk to TLS servers
+      apt: name={{ item }}
+      with_items:
+        - ca-certificates
+        - openssl
   roles:
     - role: ansible-znc

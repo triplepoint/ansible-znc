@@ -74,7 +74,6 @@ None.
 
 ## Example Playbook
     - hosts: whatever
-      sudo: yes
       roles:
         - triplepoint.znc
 
