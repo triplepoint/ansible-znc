@@ -18,7 +18,8 @@ docker:
       image: ubuntu
       image_version: 14.04
     - name: ubuntu_16_04
-      image: ubuntu
+      image: solita/ubuntu-systemd
+      privileged: True
       image_version: 16.04
 
 verifier:
