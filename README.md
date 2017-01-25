@@ -23,6 +23,7 @@ znc_exec_with_debug: false  # Should znc be executed in debug mode?  The logs wi
 ### ZNC Global Configuration
 ```
 znc_max_buffer_size: 100000    # The max size of any user buffer.  This is used as the default if no user-specific value is given.
+znc_host: 0.0.0.0              # What host address to use?
 znc_port: 6666                 # What port will znc listen on?
 znc_ipv4: true                 # Should ZNC listen for ipv4 connections?
 znc_ipv6: false                # ipv6?
