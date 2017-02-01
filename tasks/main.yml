@@ -26,9 +26,10 @@
   command: "/usr/local/bin/znc --datadir={{ znc_config_root }} --makepem"
   args:
     creates: "{{ znc_config_root }}/znc.pem"
-  become: yes
-  become_user: "{{ znc_exec_user }}"
   notify: restart znc
+
+- name: Ensure the Self-signed SSL certificate is owned by the correct user and group
+  file: path={{ znc_config_root }}/znc.pem owner={{ znc_exec_user }} group={{ znc_exec_user }}
 
 - name: Ensure the ZNC upstart service is configured
   template: src=znc.conf.upstart.j2 dest=/etc/init/znc.conf
