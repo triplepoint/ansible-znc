@@ -6,6 +6,7 @@ services:
   - docker
 
 install:
+  - pip install pipenv
   - pipenv install --ignore-pipfile
 
 script:
