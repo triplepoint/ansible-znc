@@ -1,13 +1,12 @@
 ---
-- hosts: all
-  pre_tasks:
+- name: Prepare
+  hosts: all
+  gather_facts: False
+  tasks:
     - name: Ensure CA Certificates are present, so we can talk to TLS servers
       apt: name={{ item }}
       with_items:
         - ca-certificates
         - openssl
     - name: Ensure net tools are present, to support testinfra later
-      apt: name=net-tools
-
-  roles:
-    - role: ansible-znc
+      apt: name=net-tools        

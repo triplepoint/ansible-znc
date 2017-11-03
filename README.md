@@ -77,7 +77,7 @@ None.
       roles:
         - triplepoint.znc
 
-## Testing
+## Role Testing
 This role is tested with `molecule`, using `pipenv` to handle dependencies and the Python testing environment.
 
 ### Setting Up Your Execution Environment
@@ -99,7 +99,7 @@ pipenv run molecule test
 ```
 
 ### Regenerating the Lock File
-You shouldn't have to do this very often, but if you change the Python package requirements using `pipenv install {some_package}` commands or by editing the `Pipfile`, or if you find the build dependencies have fallen out of date you might need to regenerate the `Pipefile.lock`.
+You shouldn't have to do this very often, but if you change the Python package requirements using `pipenv install {some_package}` commands or by editing the `Pipfile` directly, or if you find the build dependencies have fallen out of date, you might need to regenerate the `Pipefile.lock`.
 ``` sh
 pipenv lock
 ```

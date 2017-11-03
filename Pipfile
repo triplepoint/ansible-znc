@@ -1,5 +1,4 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
@@ -8,9 +7,7 @@ name = "pypi"
 [dev-packages]
 
 
-
 [packages]
-
 ansible = "==2.4.*"
 molecule = "==2.4.*"
 docker = "==2.5.*"
