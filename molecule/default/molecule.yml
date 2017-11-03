@@ -6,13 +6,11 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: ubuntu_12_04
-    image: ubuntu-upstart:12.04
   - name: ubuntu_14_04
     image: ubuntu-upstart:14.04
   - name: ubuntu_16_04
     image: solita/ubuntu-systemd:16.04
-    privileged: True    
+    privileged: True
 provisioner:
   name: ansible
   lint:
