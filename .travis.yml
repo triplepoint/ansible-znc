@@ -10,10 +10,10 @@ before_install:
   - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
 
 install:
-  - pip install -U ansible==2.2.0.0 molecule docker-py testinfra ansible-lint
+  - pipenv install --ignore-pipfile
 
 script:
-  - molecule test
+  - pipenv run molecule test
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
