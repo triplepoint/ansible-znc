@@ -8,5 +8,24 @@
       with_items:
         - ca-certificates
         - openssl
+
+    - name: Determine the installed Python version
+      shell: python --version 2>&1 | cut -d ' ' -f2
+      register: __python_version
+
+    - name: Ensure pip is installed, if necessary
+      apt: name=python-pip
+      when: __python_version.stdout | version_compare('2.7.9', '<=')
+
+    - name: Ensure Python can handle SNI TLS
+      pip: name={{ item }}
+      with_items:
+        - "pip>=9"
+        - urllib3
+        - pyOpenSSL
+        - ndg-httpsclient
+        - pyasn1
+      when: __python_version.stdout | version_compare('2.7.9', '<=')
+
     - name: Ensure net tools are present, to support testinfra later
-      apt: name=net-tools        
+      apt: name=net-tools
