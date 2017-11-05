@@ -6,7 +6,7 @@
   register: znc_installed_version
 
 - name: install ZNC from source
-  include: install_from_source.yml
+  import_tasks: install_from_source.yml
   when: (znc_force_install == True) or (znc_installed_version.rc != 0) or (znc_install_version | version_compare(znc_installed_version.stdout, "!="))
 
 - name: Ensure the ZNC admin group is present

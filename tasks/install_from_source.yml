@@ -61,4 +61,4 @@
   args:
     chdir: /usr/local/src/znc-{{ znc_install_version }}
   tags:
-    - skip_ansible_lint # This is already guarded by the when statement on include
+    - skip_ansible_lint   # This is already guarded by the when statement on include
