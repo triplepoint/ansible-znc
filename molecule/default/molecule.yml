@@ -1,14 +1,17 @@
 ---
 dependency:
   name: galaxy
+  options:
+    ignore-certs: True
+    role-file: molecule/requirements.yml
 driver:
   name: docker
 lint:
   name: yamllint
 platforms:
-  - name: ubuntu_14_04
-    image: triplepoint/ubuntu-upstart-14.04
-    command: /sbin/init
+  # - name: ubuntu_14_04
+  #   image: triplepoint/ubuntu-upstart-14.04
+  #   command: /sbin/init
   - name: ubuntu_16_04
     image: triplepoint/ubuntu-systemd-16.04
     privileged: True

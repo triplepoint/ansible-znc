@@ -1,3 +1,0 @@
----
-- name: restart znc
-  service: name=znc state=restarted

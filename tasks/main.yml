@@ -1,44 +1,27 @@
 ---
-- name: find the version of ZNC currently installed, if any
-  shell: '/usr/local/bin/znc --version | grep -Poh "^ZNC \K([0-9.]+)"'
-  ignore_errors: True
-  changed_when: False
-  register: znc_installed_version
-
-- name: install ZNC from source
-  import_tasks: install_from_source.yml
-  when: (znc_force_install == True) or (znc_installed_version.rc != 0) or (znc_install_version | version_compare(znc_installed_version.stdout, "!="))
+- name: Ensure Docker-related python packages are present
+  pip: name=docker
 
 - name: Ensure the ZNC admin group is present
-  group: name="{{ znc_exec_user }}"
+  group: name="{{ znc_exec_user }}" gid="{{ znc_exec_user_and_group_id }}"
 
 - name: Ensure the ZNC admin user is present
-  user: name="{{ znc_exec_user }}" group="{{ znc_exec_user }}"
+  user: name="{{ znc_exec_user }}" group="{{ znc_exec_user }}" uid="{{ znc_exec_user_and_group_id }}"
 
 - name: Ensure the ZNC configuration directory is present
-  file: path={{ znc_config_root }}/configs state=directory owner={{ znc_exec_user }} group={{ znc_exec_user }}
+  file: state=directory path={{ znc_config_root }}/configs group="{{ znc_exec_user }}" owner="{{ znc_exec_user }}"
 
 - name: Ensure the ZNC configuration file is present
-  template: src=znc.conf.j2 dest={{ znc_config_root }}/configs/znc.conf owner={{ znc_exec_user }} group={{ znc_exec_user }}
-  notify: restart znc
+  template: src=znc.conf.j2 dest={{ znc_config_root }}/configs/znc.conf group="{{ znc_exec_user }}" owner="{{ znc_exec_user }}"
+  register: _znc_config_file
 
-- name: Ensure a Self-signed SSL certificate exists for ZNC
-  command: "/usr/local/bin/znc --datadir={{ znc_config_root }} --makepem"
-  args:
-    creates: "{{ znc_config_root }}/znc.pem"
-  become: yes
-  become_user: "{{ znc_exec_user }}"
-  notify: restart znc
-
-- name: Ensure the ZNC upstart service is configured
-  template: src=znc.conf.upstart.j2 dest=/etc/init/znc.conf
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version < '16.04'
-  notify: restart znc
-
-- name: Ensure the ZNC service is configured
-  template: src=znc.service.systemd.j2 dest=/lib/systemd/system/znc.service
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version >= '16.04'
-  notify: restart znc
-
-- name: Ensure ZNC is started and enabled at boot
-  service: name=znc state=started enabled=yes
+- name: Ensure the ZNC Docker container is running
+  docker_container:
+    name: znc
+    image: "triplepoint/docker-znc:{{ znc_docker_image_version }}"
+    restart: "{{ _znc_config_file.changed }}"
+    restart_policy: always
+    ports:
+      - "{{ znc_port }}:{{ znc_port }}"
+    volumes:
+      - "/etc/znc:/etc/znc"

@@ -1,10 +1,10 @@
 ---
 # ZNC Install
+znc_exec_user: znc-exec
+znc_exec_user_and_group_id: 1066
+znc_docker_image_version: 0.1.4
 znc_install_version: 1.6.5
-znc_force_install: False
-znc_exec_user: znc-admin
 znc_config_root: /etc/znc
-znc_exec_with_debug: false
 
 ## ZNC Global Configuration
 znc_max_buffer_size: 100000

@@ -1,26 +1,26 @@
 import os
-
+import pytest
 import testinfra.utils.ansible_runner
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-def test_service_enabled(Service):
-    service = Service('znc')
+def test_docker_service_enabled(host):
+    service = host.service('docker')
     assert service.is_enabled
 
 
-def test_service_running(Service):
-    service = Service('znc')
+def test_docker_service_running(host):
+    service = host.service('docker')
     assert service.is_running
 
 
-def test_socket_listening_ipv4(Socket):
-    socket = Socket('tcp://0.0.0.0:6666')
+@pytest.mark.parametrize('socket_def', [
+    # listening on all ipv4 and ipv6 sockets on 6666
+    ('tcp://6666'),
+
+])
+def test_listening_sockets(host, socket_def):
+    socket = host.socket(socket_def)
     assert socket.is_listening
-
-
-def test_socket_listening_ipv6(Socket):
-    socket = Socket('tcp://:::6666')
-    assert not socket.is_listening
