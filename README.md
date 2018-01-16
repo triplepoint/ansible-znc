@@ -3,6 +3,11 @@ Install and configure the ZNC IRC bouncer.
 
 Includes the [ClientBuffer module](http://wiki.znc.in/Clientbuffer) to support multiple separate client buffers per account.
 
+Because this role depends on a Docker container, it's not as straightforward how to call the `znc` binary for utility functions, like `--makepass`.  For reference, here's how to run the password command from a machine which has Docker set up:
+```
+docker run -it --rm triplepoint/docker-znc:latest znc --makepass
+```
+
 ## Requirements
 None.
 
