@@ -18,11 +18,11 @@ For more information on ZNC's global, user, and network modules, see the [ZNC mo
 
 ### ZNC Install
 ```
-znc_install_version: 1.6.1  # The version of znc to install
-znc_force_install: False    # Force a reinstallation of ZNC
 znc_exec_user: znc-admin    # The user to create under which znc will run
+znc_exec_user_and_group_id: 1066  # The uid and gid of the exec user
+znc_docker_image_version: 0.1.6   # The tagged version of the `triplepoint/docker-znc` docker image
+znc_install_version: 1.6.5  # The version of znc installed with the docker image.  Should be kept in sync.
 znc_config_root: /etc/znc   # The root location of znc's configuration file structure
-znc_exec_with_debug: false  # Should znc be executed in debug mode?  The logs will show up in /var/log/upstart/znc.log
 ```
 
 ### ZNC Global Configuration
@@ -50,8 +50,8 @@ znc_users:                                # It's advisable to have a separate ad
     admin: true                           # There should be at least one admin user, but your typical user probably shouldn't be an admin.
     allow: "*"                            # Optional
     altnick: adminuser_                   # Optional
-    autoclearchanbuffer: true             # Optional
-    autoclearquerybuffer: true            # Optional
+    autoclearchanbuffer: true             # Optional, should be false if clientbuffer is being used
+    autoclearquerybuffer: true            # Optional, should be false if clientbuffer is being used
     buffer: 100000                        # Optional
     chanmodes: "+stn"                     # Optional
     ident: adminuser_                     # Optional
@@ -67,7 +67,7 @@ znc_users:                                # It's advisable to have a separate ad
         modules:                          # Optional list, thes are the network-specific modules.
           - route_replies
           - keepnick
-          - clientbuffer
+          - clientbuffer                  # Be sure to disable `autoclearchanbuffer` and `autoclearquerybuffer` if this is enabled for this user.
     modules:                              # These are the user-specific modules.
       - chansaver
       - controlpanel

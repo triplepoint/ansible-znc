@@ -2,8 +2,8 @@
 # ZNC Install
 znc_exec_user: znc-exec
 znc_exec_user_and_group_id: 1066
-znc_docker_image_version: 0.1.5
-znc_install_version: 1.6.5
+znc_docker_image_version: 0.1.6
+znc_install_version: 1.6.5  # Should be kept in sync with the version in the docker image
 znc_config_root: /etc/znc
 
 ## ZNC Global Configuration
