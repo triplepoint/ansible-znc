@@ -9,7 +9,7 @@ docker run -it --rm triplepoint/docker-znc:latest znc --makepass
 ```
 
 ## Requirements
-None.
+No hard dependency roles, but some sort of docker environment needs to be running on the host for this role to deploy.  The `geerlingguy.docker` role satisfies this requirement.
 
 ## Role Variables
 For more details on ZNC's configuration, see the [ZNC configuration documentation](http://wiki.znc.in/Configuration).
