@@ -28,6 +28,7 @@ znc_config_root: /etc/znc   # The root location of znc's configuration file stru
 ### ZNC Global Configuration
 ```
 znc_max_buffer_size: 100000    # The max size of any user buffer.  This is used as the default if no user-specific value is given.
+znc_host: 0.0.0.0              # What host address to use?
 znc_port: 6666                 # What port will znc listen on?
 znc_ipv4: true                 # Should ZNC listen for ipv4 connections?
 znc_ipv6: false                # ipv6?
