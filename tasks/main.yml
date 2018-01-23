@@ -13,6 +13,7 @@
 
 - name: Ensure the ZNC configuration file is present
   template: src=znc.conf.j2 dest={{ znc_config_root }}/configs/znc.conf group="{{ znc_exec_user }}" owner="{{ znc_exec_user }}"
+  no_log: True
   register: _znc_config_file
 
 - name: Ensure the ZNC Docker container is running
