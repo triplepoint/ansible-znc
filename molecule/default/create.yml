@@ -39,12 +39,13 @@
         image: "molecule_local/{{ item.image }}"
         state: started
         recreate: false
-        log_driver: none
+        log_driver: json-file
         command: "{{ item.command | default('bash -c \"while true; do sleep 10000; done\"') }}"
         privileged: "{{ item.privileged | default(omit) }}"
         volumes: "{{ item.volumes | default(omit) }}"
         capabilities: "{{ item.capabilities | default(omit) }}"
         ports: "{{ item.exposed_ports | default(omit) }}"
+        ulimits: "{{ item.ulimits | default(omit) }}"
       register: server
       with_items: "{{ molecule_yml.platforms }}"
       async: 7200
