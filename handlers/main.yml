@@ -1,0 +1,12 @@
+---
+- name: restart znc
+  docker_container:
+    name: znc
+    image: "triplepoint/docker-znc:{{ znc_docker_image_version }}"
+    state: started
+    restart: yes
+    restart_policy: always
+    ports:
+      - "{{ znc_port }}:{{ znc_port }}"
+    volumes:
+      - "/etc/znc:/etc/znc"

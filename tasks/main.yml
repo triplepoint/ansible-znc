@@ -14,15 +14,4 @@
 - name: Ensure the ZNC configuration file is present
   template: src=znc.conf.j2 dest={{ znc_config_root }}/configs/znc.conf group="{{ znc_exec_user }}" owner="{{ znc_exec_user }}"
   no_log: True
-  register: _znc_config_file
-
-- name: Ensure the ZNC Docker container is running
-  docker_container:
-    name: znc
-    image: "triplepoint/docker-znc:{{ znc_docker_image_version }}"
-    restart: "{{ _znc_config_file.changed }}"
-    restart_policy: always
-    ports:
-      - "{{ znc_port }}:{{ znc_port }}"
-    volumes:
-      - "/etc/znc:/etc/znc"
+  notify: restart znc

@@ -12,7 +12,7 @@ platforms:
   - name: ubuntu_16_04
     image: triplepoint/ubuntu-systemd-16.04
     privileged: True
-    command: /sbin/init
+    command: /bin/bash -c "exec /sbin/init --log-target=journal 3>&1"
 provisioner:
   name: ansible
   lint:
