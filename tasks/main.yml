@@ -15,3 +15,14 @@
   template: src=znc.conf.j2 dest={{ znc_config_root }}/configs/znc.conf group="{{ znc_exec_user }}" owner="{{ znc_exec_user }}"
   no_log: True
   notify: restart znc
+
+- name: ensure znc is started
+  docker_container:
+    name: znc
+    image: "triplepoint/docker-znc:{{ znc_docker_image_version }}"
+    state: started
+    restart_policy: always
+    ports:
+      - "{{ znc_port }}:{{ znc_port }}"
+    volumes:
+      - "/etc/znc:/etc/znc"
