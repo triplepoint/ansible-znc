@@ -6,7 +6,7 @@
     state: started
     restart: yes
     restart_policy: always
-    ports:
+    published_ports:
       - "{{ znc_port }}:{{ znc_port }}"
     volumes:
       - "/etc/znc:/etc/znc"

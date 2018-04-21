@@ -22,7 +22,7 @@
     image: "triplepoint/docker-znc:{{ znc_docker_image_version }}"
     state: started
     restart_policy: always
-    ports:
+    published_ports:
       - "{{ znc_port }}:{{ znc_port }}"
     volumes:
       - "/etc/znc:/etc/znc"
