@@ -8,6 +8,6 @@ name = "pypi"
 
 
 [packages]
-ansible = "==2.5.*"
-molecule = "==2.12.*"
+ansible = "==2.6.*"
+molecule = "==2.15.*"
 docker = "<3"
