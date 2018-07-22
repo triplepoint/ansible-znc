@@ -9,5 +9,5 @@ name = "pypi"
 
 [packages]
 ansible = "==2.6.*"
-molecule = "==2.15.*"
-docker = "<3"
+molecule = "==2.16.*"
+docker = "==3.4.*"
