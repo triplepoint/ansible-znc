@@ -4,7 +4,7 @@
     name: znc
     image: "triplepoint/docker-znc:{{ znc_docker_image_version }}"
     state: started
-    restart: yes
+    restart: true
     restart_policy: always
     published_ports:
       - "{{ znc_port }}:{{ znc_port }}"

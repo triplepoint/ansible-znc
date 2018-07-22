@@ -17,10 +17,10 @@ Version = {{ znc_install_version }}
 {% for user in znc_users %}
 <User {{ user.name }}>
     Allow        = {{ user.allow | default("*") }}
-    Admin        = {{ user.admin | default(False) | bool }}
+    Admin        = {{ user.admin | default(false) | bool }}
     AltNick      = {{ user.altnick | default(user.nick+"_") }}
-    AutoClearChanBuffer = {{ user.autoclearchanbuffer | default(True) | bool }}
-    AutoClearQueryBuffer = {{ user.autoclearquerybuffer | default(True) | bool }}
+    AutoClearChanBuffer = {{ user.autoclearchanbuffer | default(true) | bool }}
+    AutoClearQueryBuffer = {{ user.autoclearquerybuffer | default(true) | bool }}
     Buffer       = {{ user.buffer | default(znc_max_buffer_size) }}
     ChanModes    = {{ user.chanmodes | default("+stn") }}
     Ident        = {{ user.ident | default(user.nick) }}
@@ -29,7 +29,7 @@ Version = {{ znc_install_version }}
     LoadModule   = {{ module }}
 {% endfor %}
 {% endif %}
-    MultiClients = {{ user.multiclients | default(False) | bool }}
+    MultiClients = {{ user.multiclients | default(false) | bool }}
     Nick         = {{ user.nick }}
     RealName     = {{ user.realname }}
 {% if user.networks is defined %}
