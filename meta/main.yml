@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: znc
   author: Jonathan Hanson
   description: The ZNC IRC bouncer
   license: MIT
