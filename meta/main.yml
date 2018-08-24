@@ -16,4 +16,5 @@ galaxy_info:
     - IRC
     - bouncer
     - chat
+    - docker
 dependencies: []
