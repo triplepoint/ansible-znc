@@ -9,5 +9,8 @@ name = "pypi"
 
 [packages]
 ansible = "==2.6.*"
-molecule = "==2.16.*"
-docker = "==3.4.*"
+molecule = "==2.17.*"
+docker = "==3.5.*"
+
+[requires]
+python_version = "3.7"
