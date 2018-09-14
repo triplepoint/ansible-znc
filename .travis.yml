@@ -1,14 +1,24 @@
 ---
+sudo: required
+
+dist: xenial
+
 language: python
 
-sudo: required
+python: 3.7
 
 services:
   - docker
 
+env:
+  global:
+    - PIPENV_IGNORE_VIRTUALENVS=1
+
+before_install:
+  - pip install --upgrade pipenv
+
 install:
-  - pip install pipenv
-  - pipenv install --deploy
+  - yes | pipenv install --dev --deploy
 
 script:
   - pipenv run molecule test
