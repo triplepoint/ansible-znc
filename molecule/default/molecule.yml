@@ -11,14 +11,10 @@ platforms:
   - name: xenial
     image: triplepoint/ubuntu-systemd-16.04
     privileged: true
-    capabilities:
-      - NET_ADMIN
     command: /bin/bash -c "exec /sbin/init --log-target=journal 3>&1"
   - name: bionic
     image: triplepoint/ubuntu-systemd-18.04
     privileged: true
-    capabilities:
-      - NET_ADMIN
     command: /bin/bash -c "exec /sbin/init --log-target=journal 3>&1"
 provisioner:
   name: ansible
