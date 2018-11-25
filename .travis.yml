@@ -15,7 +15,7 @@ env:
     - PIPENV_IGNORE_VIRTUALENVS=1
 
 before_install:
-  - pip install --upgrade pipenv
+  - pip install --upgrade "pipenv==2018.10.13"
 
 install:
   - yes | pipenv install --dev --deploy
